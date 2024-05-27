@@ -1,0 +1,9 @@
+{% sw_extends '@Storefront/storefront/page/account/addressbook/index.html.twig' %}
+
+
+{% block page_account_address_main %}
+    {{ parent() }}
+    <div>
+        <strong>{{ "general.text"|trans|sw_sanitize }}</strong>
+    </div>
+{% endblock %}

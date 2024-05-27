@@ -1,0 +1,25 @@
+{% sw_extends '@Storefront/storefront/page/account/payment/index.html.twig' %}
+
+
+{% block page_account_payment_form %}
+    <form action="{{ path('frontend.account.payment.save') }}"
+          method="post">
+        <input type="hidden" name="redirectTo" value="frontend.account.payment.page">
+        {% block page_account_payment_fields %}
+            {% sw_include '@Storefront/storefront/component/payment/payment-fields.html.twig' with {
+                'visiblePaymentMethodsLimit': null,
+                'selectedPaymentMethodId': context.customer.defaultPaymentMethodId
+            } %}
+        {% endblock %}
+
+        {% if config('CustomerAddressConfig.config.customerGroup') !== context.customer.groupId %}
+            {% block page_account_payment_actions %}
+                <button class="btn btn-primary"
+                        type="submit"
+                        title="{{ "account.paymentChangeSubmit"|trans|striptags }}">
+                    {{ "account.paymentChangeSubmit"|trans|sw_sanitize }}
+                </button>
+            {% endblock %}
+        {% endif %}
+    </form>
+{% endblock %}
